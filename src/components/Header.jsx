@@ -30,10 +30,10 @@ const Header = () => {
                         {/* <li><a href="ComingSoon">Coming Soon</a></li> */}
                       </ul>
                     </li>
-                    <li ><Link to="RoomStyle">Room</Link>
+                    {/* <li ><Link to="RoomStyle">Room</Link>
 
-                    </li>
-                    <li><Link to="HotelPage">Hotels</Link>
+                    </li> */}
+                    <li><Link to="RoomDetails">Rooms</Link>
 
                     </li>
                     <li><Link to="Contact">Contact</Link></li>
@@ -48,11 +48,11 @@ const Header = () => {
               </div>
               }
 
-              <div className="header__area-menubar-right-box">
-               <div className="header__area-menubar-right-box-btn">
-                 <Link to="profile"><i style={{color:"white", fontSize:"30px"}} className="far fa-user-circle"></i></Link>
-               </div>
-             </div>
+              {user && <div className="header__area-menubar-right-box">
+                <div className="header__area-menubar-right-box-btn">
+                  <Link to="profile"><i style={{ color: "white", fontSize: "30px" }} className="far fa-user-circle"></i></Link>
+                </div>
+              </div>}
             </div>
           </div>
         </div>

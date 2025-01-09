@@ -15,38 +15,16 @@ import StaffProfile from './nestedPages/StaffProfile';
 import GuestProfile from './nestedPages/GuestProfile';
 import RoomStatusUpdatePage from './nestedPages/RoomStatusUpdatePage';
 import RoomBooking from './nestedPages/RoomBooking';
-
-// Dummy Components for Pages
-const DashboardPage = () => <div>Dashboard Page</div>;
-const OrdersPage = () => <div>Orders Page</div>;
-const ReportsPage = () => <div>Reports Page</div>;
-const SalesPage = () => <div>Sales Page</div>;
-const TrafficPage = () => <div>Traffic Page</div>;
-const Analytics = () => <div>Analytics  Page</div>;
-const Schedule = () => <div>Schedule Page</div>;
+import InvoiceList from './nestedPages/InvoiceList';
+import UpdateRoomDetails from './nestedPages/UpdateRoomDetails';
+import AnalyticsPage from './nestedPages/AnalyticsPage';
 
 const NAVIGATION = [
   {
     kind: 'header',
     title: 'Main items',
   },
-  {
-    segment: 'dashboard',
-    title: 'Dashboard',
-    icon: <DashboardIcon />,
-  },
-  {
-    segment: 'orders',
-    title: 'Orders',
-    icon: <ShoppingCartIcon />,
-  },
-  {
-    kind: 'divider',
-  },
-  {
-    kind: 'header',
-    title: 'Analytics',
-  },
+ 
   {
     segment: 'roommanagement',
     title: 'Room Management',
@@ -60,6 +38,11 @@ const NAVIGATION = [
       {
         segment: 'rooms',
         title: 'Rooms',
+        icon: <DescriptionIcon />,
+      },
+      {
+        segment: 'updateroom',
+        title: 'Update Room Details',
         icon: <DescriptionIcon />,
       },
     ],
@@ -93,6 +76,7 @@ const NAVIGATION = [
     title: 'Analytics',
     icon: <BarChartIcon />,
   },
+  
 ];
 
 const demoTheme = extendTheme({
@@ -139,21 +123,12 @@ const Skeleton = styled('div')(({ theme, height }) => ({
 export default function ManagerDashboard(props) {
   const { window, children } = props;
 
-  const router = useDemoRouter('/dashboard');
+  const router = useDemoRouter('/roommanagement');
 
   // Map routes to components
   const renderPage = () => {
     switch (router.pathname) {
-      case '/dashboard':
-        return <DashboardPage />;
-      case '/orders':
-        return <OrdersPage />;
-      case '/reports':
-        return <ReportsPage />;
-      case '/reports/sales':
-        return <SalesPage />;
-      case '/reports/traffic':
-        return <TrafficPage />;
+ 
       case '/roommanagement':
         return <RoomsPage router={router} />;
       case '/roommanagement/createroom':
@@ -162,6 +137,8 @@ export default function ManagerDashboard(props) {
         return <RoomsPage router={router} />;
       case `/roommanagement/rooms/${router.params.id}`:
         return <RoomStatusUpdatePage router={router} />;
+        case '/roommanagement/updateroom':
+          return <UpdateRoomDetails router={router}/>;
       case '/users':
         return <StaffProfile />;
       case '/users/staffprofile':
@@ -170,8 +147,10 @@ export default function ManagerDashboard(props) {
         return <GuestProfile />;
       case '/bookroom':
         return <RoomBooking />;
-      case '/analytics':
-        return <Analytics />;
+      case '/invoices':
+        return <InvoiceList />;
+        case '/analytics':
+          return <AnalyticsPage />;
       default:
         return <div>Page Not Found</div>;
     }

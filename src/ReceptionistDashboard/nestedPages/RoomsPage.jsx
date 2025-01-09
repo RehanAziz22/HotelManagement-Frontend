@@ -26,6 +26,9 @@ const RoomInventory = ({router}) => {
                   <TableCell>Room Number</TableCell>
                   <TableCell>Room Type</TableCell>
                   <TableCell>Status</TableCell>
+                  <TableCell>Price Per Night</TableCell>
+                  <TableCell>Image</TableCell> {/* New column for room image */}
+                  <TableCell>Actions</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -34,7 +37,22 @@ const RoomInventory = ({router}) => {
                     <TableCell>{room.roomNumber}</TableCell>
                     <TableCell>{room.roomType}</TableCell>
                     <TableCell>{room.status}</TableCell>
-                   
+                    <TableCell>{room.pricePerNight}</TableCell>
+                    <TableCell>
+                      {room.imageUrl ? (
+                        <img src={room.imageUrl} alt={room.roomNumber} width={50} height={50} style={{ objectFit: 'cover' }} />
+                      ) : (
+                        <Typography variant="body2" color="textSecondary">No Image</Typography>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                        <Button variant="outlined" 
+                          onClick={() => router.navigate(`/roommanagement/rooms/${room._id}`)} 
+                          color="primary" sx={{ marginRight: 2 }}>
+                          Update Status
+                        </Button>
+                     
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

@@ -8,12 +8,21 @@ import LayersIcon from '@mui/icons-material/Layers';
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
-import AvaliableTasks from './nestedPages/AvaliableTasks';
+import Grid from '@mui/material/Grid2';
+import RoomsPage from './nestedPages/RoomsPage';
+import CreateRoomPage from './nestedPages/CreateRoomPage';
+import GuestProfile from './nestedPages/GuestProfile';
+import RoomStatusUpdatePage from './nestedPages/RoomStatusUpdatePage';
+import RoomBooking from './nestedPages/RoomBooking';
 import ScheduleTask from './nestedPages/ScheduleTask';
-import RoomInventory from './nestedPages/RoomsPage';
+import UpdateRoomDetails from './nestedPages/UpdateRoomDetails';
 
+// Dummy Components for Pages
 const NAVIGATION = [
 
+  {
+    kind: 'divider',
+  },
   {
     kind: 'header',
     title: 'Analytics',
@@ -22,24 +31,39 @@ const NAVIGATION = [
     segment: 'roommanagement',
     title: 'Room Management',
     icon: <BarChartIcon />,
- 
-  },
-  {
-    segment: 'tasks',
-    title: 'Tasks',
-    icon: <BarChartIcon />,
     children: [
       {
-        segment: 'scheduletasks',
-        title: 'ScheduleTasks',
+        segment: 'createroom',
+        title: 'Create Room',
         icon: <DescriptionIcon />,
       },
       {
-        segment: 'avaliabletasks',
-        title: 'Avaliable Tasks',
+        segment: 'updateroom',
+        title: 'Update Room Details',
+        icon: <DescriptionIcon />,
+      },
+      {
+        segment: 'rooms',
+        title: 'Rooms',
         icon: <DescriptionIcon />,
       },
     ],
+  },
+  {
+    segment: 'users',
+    title: 'Users',
+    icon: <BarChartIcon />,
+
+  },
+  {
+    segment: 'bookroom',
+    title: 'Book Room',
+    icon: <BarChartIcon />,
+  },
+  {
+    segment: 'reportissue',
+    title: 'Report Issue',
+    icon: <BarChartIcon />,
   },
 ];
 
@@ -63,7 +87,7 @@ function useDemoRouter(initialPath) {
   const router = React.useMemo(() => {
     const params = {}
     const pathParts = pathname.split('/')
-    if(pathParts[1]==="roommanagement" && pathParts[2] === "rooms"){
+    if (pathParts[1] === "roommanagement" && pathParts[2] === "rooms") {
       params.id = pathParts[3]
     }
     return {
@@ -84,7 +108,7 @@ const Skeleton = styled('div')(({ theme, height }) => ({
   content: '" "',
 }));
 
-export default function HousekeepingDashboard(props) {
+export default function RecepitionistDashboard(props) {
   const { window, children } = props;
 
   const router = useDemoRouter('/roommanagement');
@@ -92,17 +116,22 @@ export default function HousekeepingDashboard(props) {
   // Map routes to components
   const renderPage = () => {
     switch (router.pathname) {
-     
-      case '/tasks':
-        return <AvaliableTasks router={router} />;
-      case '/tasks/scheduletasks':
-        return <ScheduleTask router={router} />;
-      case '/tasks/avaliabletasks':
-        return <AvaliableTasks router={router} />;
       case '/roommanagement':
-        return <RoomInventory router={router} />;
+        return <RoomsPage router={router} />;
+      case '/roommanagement/createroom':
+        return <CreateRoomPage router={router} />;
+      case '/roommanagement/rooms':
+        return <RoomsPage router={router} />;
       case `/roommanagement/rooms/${router.params.id}`:
         return <RoomStatusUpdatePage router={router} />;
+        case '/roommanagement/updateroom':
+          return <UpdateRoomDetails router={router}/>;
+      case '/users':
+        return <GuestProfile />;
+      case '/bookroom':
+        return <RoomBooking />;
+      case '/reportissue':
+        return <ScheduleTask />;
       default:
         return <div>Page Not Found</div>;
     }
