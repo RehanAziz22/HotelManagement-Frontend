@@ -43,7 +43,7 @@ const CreateRoomPage = ({router}) => {
 
     try {
       // Make sure the URL points to your backend API correctly
-      const response = await axios.post('http://localhost:3000/api/room/create', roomDetails);
+      const response = await axios.post('https://hotel-management-backend-ruby.vercel.app/api/room/create', roomDetails);
 
       if (response.data.status) {
         setSnackbarMessage('Room created successfully!');

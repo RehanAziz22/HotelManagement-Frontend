@@ -35,7 +35,7 @@ const StaffProfile = () => {
   // Fetch users
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/user");
+      const response = await axios.get("https://hotel-management-backend-ruby.vercel.app/api/user");
       const filteredUsers = response.data.data.filter(
         (user) => user.role !== "guest"
       );
@@ -60,7 +60,7 @@ const StaffProfile = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/user/signup",
+        "https://hotel-management-backend-ruby.vercel.app/api/user/signup",
         formData
       );
       if (response.data.status) {
@@ -79,7 +79,7 @@ const StaffProfile = () => {
   // Delete a user
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/user/${id}`);
+      await axios.delete(`https://hotel-management-backend-ruby.vercel.app/api/user/${id}`);
       setUsers((prev) => prev.filter((user) => user._id !== id));
       toast.success("User deleted successfully");
     } catch (error) {
@@ -104,7 +104,7 @@ const StaffProfile = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/user/update/${updateUserId}`,
+        `https://hotel-management-backend-ruby.vercel.app/api/user/update/${updateUserId}`,
         { name: formData.name, role: formData.role }
       );
       if (response.data.status) {

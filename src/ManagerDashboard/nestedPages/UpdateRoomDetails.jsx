@@ -16,7 +16,7 @@ const UpdateRoomDetails = ({router}) => {
     });
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/room')
+        axios.get('https://hotel-management-backend-ruby.vercel.app/api/room')
             .then(response => {
                 setRooms(response.data.data);
                 console.log(response.data7.data);
@@ -45,7 +45,7 @@ const UpdateRoomDetails = ({router}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`http://localhost:3000/api/room/update`, formData);
+            const response = await axios.post(`https://hotel-management-backend-ruby.vercel.app/api/room/update`, formData);
             toast.success(response.data.message);
             router.navigate('/roommanagement')
 

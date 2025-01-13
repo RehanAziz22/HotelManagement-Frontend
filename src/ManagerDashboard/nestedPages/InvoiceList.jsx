@@ -8,7 +8,7 @@ const InvoiceList = () => {
     useEffect(() => {
         const fetchInvoices = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/invoice');
+                const response = await fetch('https://hotel-management-backend-ruby.vercel.app/api/invoice');
                 const data = await response.json();
                 setInvoices(data);
             } catch (error) {

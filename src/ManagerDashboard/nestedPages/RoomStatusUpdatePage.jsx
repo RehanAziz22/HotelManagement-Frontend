@@ -13,7 +13,7 @@ const RoomStatusUpdatePage = ({router}) => {
 
   // Fetch the room details by ID
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/room/${id}`)
+    axios.get(`https://hotel-management-backend-ruby.vercel.app/api/room/${id}`)
       .then(response => {
         setRoom(response.data.data);
         setStatus(response.data.data.status);
@@ -30,7 +30,7 @@ const RoomStatusUpdatePage = ({router}) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.put(`http://localhost:3000/api/room/${id}/status`, { status });
+      await axios.put(`https://hotel-management-backend-ruby.vercel.app/api/room/${id}/status`, { status });
       setSnackbarMessage('Room status updated successfully.');
       setOpenSnackbar(true);
     } catch (error) {

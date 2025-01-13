@@ -11,6 +11,7 @@ import { PageContainer } from '@toolpad/core/PageContainer';
 import AvaliableTasks from './nestedPages/AvaliableTasks';
 import ScheduleTask from './nestedPages/ScheduleTask';
 import RoomInventory from './nestedPages/RoomsPage';
+import { useNavigate } from 'react-router-dom';
 
 const NAVIGATION = [
 
@@ -22,7 +23,7 @@ const NAVIGATION = [
     segment: 'roommanagement',
     title: 'Room Management',
     icon: <BarChartIcon />,
- 
+
   },
   {
     segment: 'tasks',
@@ -40,6 +41,18 @@ const NAVIGATION = [
         icon: <DescriptionIcon />,
       },
     ],
+  },
+  {
+    kind: 'divider',
+  },
+  {
+    kind: 'header',
+    title: 'User',
+  },
+  {
+    segment: 'logout',
+    title: 'Logout',
+    icon: <LayersIcon />,
   },
 ];
 
@@ -63,7 +76,7 @@ function useDemoRouter(initialPath) {
   const router = React.useMemo(() => {
     const params = {}
     const pathParts = pathname.split('/')
-    if(pathParts[1]==="roommanagement" && pathParts[2] === "rooms"){
+    if (pathParts[1] === "roommanagement" && pathParts[2] === "rooms") {
       params.id = pathParts[3]
     }
     return {
@@ -85,14 +98,16 @@ const Skeleton = styled('div')(({ theme, height }) => ({
 }));
 
 export default function HousekeepingDashboard(props) {
-  const { window, children } = props;
+  const { window, children,handleLogout } = props;
 
   const router = useDemoRouter('/roommanagement');
+  const navigate = useNavigate()
+
 
   // Map routes to components
   const renderPage = () => {
     switch (router.pathname) {
-     
+
       case '/tasks':
         return <AvaliableTasks router={router} />;
       case '/tasks/scheduletasks':
@@ -103,6 +118,8 @@ export default function HousekeepingDashboard(props) {
         return <RoomInventory router={router} />;
       case `/roommanagement/rooms/${router.params.id}`:
         return <RoomStatusUpdatePage router={router} />;
+      case '/logout':
+        return handleLogout();
       default:
         return <div>Page Not Found</div>;
     }
@@ -115,11 +132,16 @@ export default function HousekeepingDashboard(props) {
     <AppProvider
       navigation={NAVIGATION}
       router={router}
-      theme={demoTheme}
+      // theme={demoTheme}
       window={demoWindow}
+      branding={{
+        logo:  <img src="../../public/assets/img/logo.png" alt="LixuryStay logo" />,
+        title: '',
+        homeUrl:"roommanagement"
+      }}
     >
-      <DashboardLayout>
-        <PageContainer>
+      <DashboardLayout  >
+        <PageContainer >
           {renderPage()}
         </PageContainer>
       </DashboardLayout>

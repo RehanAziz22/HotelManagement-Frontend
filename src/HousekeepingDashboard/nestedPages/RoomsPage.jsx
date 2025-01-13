@@ -8,7 +8,7 @@ const RoomInventory = ({router}) => {
 
   // Fetching the room data from the backend
   useEffect(() => {
-    fetch('http://localhost:3000/api/room')
+    fetch('https://hotel-management-backend-ruby.vercel.app/api/room')
       .then((response) => response.json())
       .then((data) => setRooms(data.data))
       .catch((error) => console.error('Error fetching rooms:', error));

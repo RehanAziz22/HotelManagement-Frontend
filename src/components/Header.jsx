@@ -12,16 +12,19 @@ const Header = () => {
             <div className="header__area-menubar">
               <div className="header__area-menubar-left">
                 <div className="header__area-menubar-left-logo">
-                  <a href="index.html"><img src="/assets/img/logo.png" alt="Logo" /></a>
+                  <Link to="/"><img src="/assets/img/logo.png" alt="Logo" /></Link>
                   <div className="responsive-menu"></div>
                 </div>
               </div>
               <div className="header__area-menubar-right">
                 <div className="header__area-menubar-right-menu menu-responsive">
                   <ul id="mobilemenu">
-                    <li><Link to="/">Home</Link>
+                    <li><Link to="/">Home</Link>     </li>
 
-                    </li>
+                    <li><Link to="RoomDetails">Rooms</Link>   </li>
+
+                    <li><Link to="mybookings">My Bookings</Link>    </li>
+
                     <li className="menu-item-has-children"><Link to="About">Pages</Link>
                       <ul className="sub-menu">
                         <li><Link to="About">About</Link></li>
@@ -30,12 +33,7 @@ const Header = () => {
                         {/* <li><a href="ComingSoon">Coming Soon</a></li> */}
                       </ul>
                     </li>
-                    {/* <li ><Link to="RoomStyle">Room</Link>
 
-                    </li> */}
-                    <li><Link to="RoomDetails">Rooms</Link>
-
-                    </li>
                     <li><Link to="Contact">Contact</Link></li>
                   </ul>
                 </div>

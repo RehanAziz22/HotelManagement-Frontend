@@ -3,9 +3,11 @@ import axios from 'axios';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Box, CircularProgress } from '@mui/material';
 
 const HotelCat = () => {
   const [rooms, setRooms] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const roomType = location.state;
@@ -13,10 +15,12 @@ const HotelCat = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/room');
+        const response = await axios.get('https://hotel-management-backend-ruby.vercel.app/api/room');
         setRooms(response.data.data);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching rooms:', error);
+        setIsLoading(false);
       }
     };
     fetchRooms();
@@ -58,7 +62,12 @@ const HotelCat = () => {
           <div className="row">
             <div className="col-xl-12">
               {/* Conditional rendering based on filtered rooms */}
-              {filteredRooms.length > 0 ? (
+
+
+              {isLoading && <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh',width:'100%' }}>
+                <CircularProgress size={70} sx={{ color: "#B89146",alignSelf:"center" }} />
+              </Box>}
+              {!isLoading && filteredRooms.length > 0 && (
                 filteredRooms.map((room) => (
                   <div className="room__list-item" key={room._id}>
                     <div className="room__list-item-left">
@@ -84,7 +93,7 @@ const HotelCat = () => {
                           onClick={() => {
                             if (localStorage.getItem('user')) {
                               navigate(`/HotelCat/${room._id}`)
-                            }else{
+                            } else {
                               navigate('/LoginPage')
                             }
                           }}
@@ -97,12 +106,12 @@ const HotelCat = () => {
                     </div>
                   </div>
                 ))
-              ) : (
-                // Display message if no rooms are available
-                <p style={{ textAlign: 'center', fontSize: '20px', color: 'red' }}>
-                  No rooms available for "{roomType}".
-                </p>
               )}
+
+              { // Display message if no rooms are available
+                !isLoading && !(filteredRooms.length > 0) && (<p style={{ textAlign: 'center', fontSize: '20px', color: 'red' }}>
+                  No rooms available for "{roomType}".
+                </p>)}
             </div>
           </div>
         </div>

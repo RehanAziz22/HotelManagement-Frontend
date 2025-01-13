@@ -81,7 +81,7 @@ const SignupPage = () => {
     const validationErrors = validate();
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await axios.post("http://localhost:3000/api/user/signup", formData);
+        const response = await axios.post("https://hotel-management-backend-ruby.vercel.app/api/user/signup", formData);
 
         if (response.data.status) {
           toast.success("Signup successful!");

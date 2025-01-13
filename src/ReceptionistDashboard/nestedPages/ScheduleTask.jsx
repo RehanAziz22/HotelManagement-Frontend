@@ -13,7 +13,7 @@ const ScheduleTask = () => {
     useEffect(() => {
         const fetchRooms = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/room');
+                const response = await axios.get('https://hotel-management-backend-ruby.vercel.app/api/room');
                 setRooms(response.data.data);
             } catch (error) {
                 console.error('Error fetching rooms:', error);
@@ -31,7 +31,7 @@ const ScheduleTask = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:3000/api/task/scheduletask', taskData);
+            await axios.post('https://hotel-management-backend-ruby.vercel.app/api/task/scheduletask', taskData);
             toast.success('Task scheduled successfully!');
         } catch (error) {
             console.error('Error scheduling task:', error);

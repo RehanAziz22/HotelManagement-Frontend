@@ -11,7 +11,7 @@ const AvaliableTasks = () => {
 
     const fetchTasks = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/task');
+            const response = await axios.get('https://hotel-management-backend-ruby.vercel.app/api/task');
             setTasks(response.data.data);
         } catch (error) {
             console.error('Error fetching tasks:', error);
@@ -20,7 +20,7 @@ const AvaliableTasks = () => {
 
     const markAsCompleted = async (taskId) => {
         try {
-            await axios.put(`http://localhost:3000/api/task/${taskId}`);
+            await axios.put(`https://hotel-management-backend-ruby.vercel.app/api/task/${taskId}`);
             setTasks(prevTasks =>
                 prevTasks.map(task =>
                     task._id === taskId ? { ...task, status: 'completed' } : task

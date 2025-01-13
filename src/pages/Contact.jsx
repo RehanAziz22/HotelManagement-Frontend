@@ -1,16 +1,59 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const Contact = () => {
-  return (
-  
-    <div>
-        {/* <Header/> */}
 
-    {/* Page Banner Start */}
-    <div className="page__banner" style={{ backgroundImage: "url('/assets/img/banner/page-banner-9.jpg')" }}>
+  const user = JSON.parse(localStorage.getItem('user'))
+  const navigate = useNavigate()
+  console.log(user);
+  // State to hold form data
+  const [formData, setFormData] = useState({
+    name: user?.name || "",
+    email: user?.email || "",
+    message: "",
+  });
+  const submitfeedback = async (e) => {
+    e.preventDefault(); // Prevent page reload on form submission
+    if (!user) {
+      navigate('/loginpage')
+    } else {
+
+      try {
+        const response = await axios.post("https://hotel-management-backend-ruby.vercel.app/api/feedback/create", formData);
+        console.log(response)
+        if (response.data.status) {
+          toast.success("Feedback submitted successfully");
+          setFormData({
+            name: "",
+            email: "",
+            message: "",
+          }); // Reset form after successful submission
+        }
+      } catch (error) {
+        console.error("Error submitting feedback", error);
+        toast.error("Error submitting feedback");
+      }
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  return (
+
+    <div>
+      {/* <Header/> */}
+
+      {/* Page Banner Start */}
+      <div className="page__banner" style={{ backgroundImage: "url('/assets/img/banner/page-banner-9.jpg')" }}>
         <div className="container">
           <div className="row">
             <div className="col-xl-12">
@@ -80,36 +123,25 @@ const Contact = () => {
             <div className="col-xl-7 col-lg-7">
               <div className="contact__area-form">
                 <h3 className="mb-35">Send Message</h3>
-                <form action="#">
+                <form onSubmit={submitfeedback}>
                   <div className="row">
-                    <div className="col-sm-6 mb-30">
+                    <div className="col-sm-12 mb-30">
                       <div className="contact__area-form-item">
                         <i className="fal fa-user"></i>
-                        <input type="text" name="name" placeholder="Full Name" required />
-                      </div>
-                    </div>
-                    <div className="col-sm-6 sm-mb-30">
-                      <div className="contact__area-form-item">
-                        <i className="far fa-envelope-open"></i>
-                        <input type="email" name="email" placeholder="Email Address" required />
-                      </div>
-                    </div>
-                    <div className="col-sm-6 mb-30">
-                      <div className="contact__area-form-item">
-                        <i className="far fa-phone-alt"></i>
-                        <input type="text" name="phone" placeholder="Phone" required />
-                      </div>
-                    </div>
-                    <div className="col-sm-6 sm-mb-30">
-                      <div className="contact__area-form-item">
-                        <i className="far fa-address-book"></i>
-                        <input type="text" name="subject" placeholder="Subject" required />
+                        <input type="text" defaultValue={formData.name} name="name" onChange={handleInputChange} placeholder="Full Name" required />
                       </div>
                     </div>
                     <div className="col-sm-12 mb-30">
                       <div className="contact__area-form-item">
+                        <i className="far fa-envelope-open"></i>
+                        <input type="email" defaultValue={formData?.email || ''} name="email" onChange={handleInputChange} placeholder="Email Address" required />
+                      </div>
+                    </div>
+
+                    <div className="col-sm-12 mb-30">
+                      <div className="contact__area-form-item">
                         <i className="far fa-comments"></i>
-                        <textarea name="message" placeholder="Type your comments...."></textarea>
+                        <textarea name="message" onChange={handleInputChange} placeholder="Type your comments...."></textarea>
                       </div>
                     </div>
                     <div className="col-lg-12">
@@ -138,7 +170,7 @@ const Contact = () => {
 
 
 
-   {/* <Footer/> */}
+      {/* <Footer/> */}
     </div>
   )
 }

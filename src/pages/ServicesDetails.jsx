@@ -37,18 +37,7 @@ const ServicesDetails = () => {
                     <div className="row">
                         <div className="col-xxl-3 col-xl-4 col-lg-4 lg-mb-30">
                             <div className="all__sidebar">
-                                <div className="all__sidebar-item">
-                                    <h5>Category</h5>
-                                    <div className="all__sidebar-item-category">
-                                        <ul>
-                                            <li><a href="ServicesDetails"><i className="far fa-angle-double-right"></i>Small Suite<span>(06)</span></a></li>
-                                            <li><a className="active" href="ServicesDetails"><i className="far fa-angle-double-right"></i>Luxury Room<span>(08)</span></a></li>
-                                            <li><a href="ServicesDetails"><i className="far fa-angle-double-right"></i>Single<span>(05)</span></a></li>
-                                            <li><a href="ServicesDetails"><i className="far fa-angle-double-right"></i>Family<span>(09)</span></a></li>
-                                            <li><a href="ServicesDetails"><i className="far fa-angle-double-right"></i>Double Room<span>(03)</span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                       
                                 <div className="all__sidebar-item-help mt-30" style={{ backgroundImage: 'url(/assets/img/hotel/hotel-9.jpg)' }}>
                                     <div className="all__sidebar-item-help-icon">
                                         <i className="fal fa-phone-alt"></i>
@@ -135,7 +124,6 @@ const ServicesDetails = () => {
             {/* Services Details End */}
 
 
-            <Footer/>
     </div>
   )
 }

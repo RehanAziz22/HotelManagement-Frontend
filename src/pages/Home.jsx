@@ -1,13 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Home = () => {
+  const navigate = useNavigate()
   return (
     <div>
-  {/* <Header/> */}
+      {/* <Header/> */}
 
       {/* Banner Area Start */}
       <div className="banner__area" style={{ backgroundImage: 'url(/assets/img/banner-1.jpg)' }}>
@@ -24,7 +23,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="row">
+          {/* <div className="row">
             <form action="#">
               <div className="check__area">
                 <div className="check__area-item">
@@ -50,13 +49,13 @@ const Home = () => {
                 </div>
               </div>
             </form>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* Banner Area End */}
 
 
-    
+
 
       {/* Accommodations Area Start */}
       <div className="accommodations__area section-padding">
@@ -67,7 +66,7 @@ const Home = () => {
                 <span className="subtitle__one">Accommodations</span>
                 <h2>Welcome Our Hotels And Resorts</h2>
                 <p>Savvy travelers are looking for more than just the next destination on the map. They are looking for a memorable experience and to make new friends along the way.</p>
-                <a className="theme-btn" href="about.jsx">Read More<i className="fal fa-long-arrow-right"></i></a>
+                <Link className="theme-btn" to="about">Read More<i className="fal fa-long-arrow-right"></i></Link>
               </div>
             </div>
             <div className="col-xl-7 col-lg-6">
@@ -85,91 +84,75 @@ const Home = () => {
       </div>
       {/* Accommodations Area End */}
 
-  <div className="deluxe__area section-padding">
-    <div className="container">
-        <div className="row align-items-end mb-60">
+      <div className="deluxe__area section-padding">
+        <div className="container">
+          <div className="row align-items-end mb-60">
             <div className="col-xl-5">
-                <div className="deluxe__area-title">
-                    <span className="subtitle__one">Deluxe and Luxury</span>
-                    <h2>Our Luxury Rooms</h2>
-                </div>                    
+              <div className="deluxe__area-title">
+                <span className="subtitle__one">Deluxe and Luxury</span>
+                <h2>Our Luxury Rooms</h2>
+              </div>
             </div>
-            <div className="col-xl-7">
-                <div className="deluxe__area-btn">
-                    <ul>
-                        <li className="active" data-filter="*">All Rooms</li>
-                        <li data-filter=".luxury">Luxury</li>
-                        <li data-filter=".single">Single</li>
-                        <li data-filter=".suite">Small Suite</li>
-                        <li data-filter=".family">Family</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div className="row deluxe__area-active">
+          </div>
+          <div className="row deluxe__area-active">
             <div className="col-xl-3 col-lg-4 mb-30 suite">
-                <div className="deluxe__area-item deluxe__area-hover"> 
-                    <div className="deluxe__area-item-image">
-                        <img className="img__full" src="/assets/img/luxury/luxury-1.jpg" alt="Small Suite" />
-                    </div>
-                    <div className="deluxe__area-item-content"> 
-                        <h6><a href="#"><span>$134</span> / Night</a></h6>
-                        <h4><a href="RoomDetails.jsx">Small Suite</a></h4>
-                        <a className="simple-btn" href="Contact.jsx"><i className="far fa-chevron-right"></i>Booking Now</a> 
-                    </div>
+              <div className="deluxe__area-item deluxe__area-hover">
+                <div className="deluxe__area-item-image">
+                  <img className="img__full" src="/assets/img/luxury/luxury-1.jpg" alt="Small Suite" />
                 </div>
+                <div className="deluxe__area-item-content">
+                  <h4><a href="RoomDetails.jsx">Small Suite</a></h4>
+                  <a className="simple-btn" href="Contact.jsx"><i className="far fa-chevron-right"></i>Booking Now</a>
+                </div>
+              </div>
             </div>
             <div className="col-xl-6 col-lg-8 mb-30 suite">
-                <div className="deluxe__area-item deluxe__area-hover"> 
-                    <div className="deluxe__area-item-image">
-                        <img className="img__full" src="/assets/img/luxury/luxury-2.jpg" alt="Deluxe Room" />
-                    </div>
-                    <div className="deluxe__area-item-content"> 
-                        <h6><a href="#"><span>$199</span> / Night</a></h6>
-                        <h4><a href="RoomDetails.jsx">Deluxe Room</a></h4>
-                        <a className="simple-btn" href="Contact.jsx"><i className="far fa-chevron-right"></i>Booking Now</a> 
-                    </div>
+              <div className="deluxe__area-item deluxe__area-hover">
+                <div className="deluxe__area-item-image">
+                  <img className="img__full" src="/assets/img/luxury/luxury-2.jpg" alt="Deluxe Room" />
                 </div>
+                <div className="deluxe__area-item-content">
+                  <h4><a href="RoomDetails.jsx">Deluxe Room</a></h4>
+                  <a className="simple-btn" href="Contact.jsx"><i className="far fa-chevron-right"></i>Booking Now</a>
+                </div>
+              </div>
             </div>
             <div className="col-xl-3 col-lg-4 mb-30 family">
-                <div className="deluxe__area-item deluxe__area-hover"> 
-                    <div className="deluxe__area-item-image">
-                        <img className="img__full" src="/assets/img/luxury/luxury-3.jpg" alt="Family Room" />
-                    </div>
-                    <div className="deluxe__area-item-content"> 
-                        <h6><a href="#"><span>$319</span> / Night</a></h6>
-                        <h4><a href="RoomDetails.jsx">Family Room</a></h4>
-                        <a className="simple-btn" href="Contact.jsx"><i className="far fa-chevron-right"></i>Booking Now</a> 
-                    </div>
+              <div className="deluxe__area-item deluxe__area-hover">
+                <div className="deluxe__area-item-image">
+                  <img className="img__full" src="/assets/img/luxury/luxury-3.jpg" alt="Family Room" />
                 </div>
+                <div className="deluxe__area-item-content">
+                  <h4><a href="RoomDetails.jsx">Family Room</a></h4>
+                  <a className="simple-btn" href="Contact.jsx"><i className="far fa-chevron-right"></i>Booking Now</a>
+                </div>
+              </div>
             </div>
             <div className="col-xl-6 col-lg-8 lg-mb-30 single">
-                <div className="deluxe__area-item deluxe__area-hover"> 
-                    <div className="deluxe__area-item-image">
-                        <img className="img__full" src="/assets/img/luxury/luxury-4.jpg" alt="Single Room" />
-                    </div>
-                    <div className="deluxe__area-item-content"> 
-                        <h6><a href="#"><span>$169</span> / Night</a></h6>
-                        <h4><a href="RoomDetails.jsx">Single Room</a></h4>
-                        <a className="simple-btn" href="Contact.jsx"><i className="far fa-chevron-right"></i>Booking Now</a> 
-                    </div>
+              <div className="deluxe__area-item deluxe__area-hover">
+                <div className="deluxe__area-item-image">
+                  <img className="img__full" src="/assets/img/luxury/luxury-4.jpg" alt="Single Room" />
                 </div>
+                <div className="deluxe__area-item-content">
+                  <h4><a href="RoomDetails.jsx">Single Room</a></h4>
+                  <a className="simple-btn" href="Contact.jsx"><i className="far fa-chevron-right"></i>Booking Now</a>
+                </div>
+              </div>
             </div>
             <div className="col-xl-6 luxury">
-                <div className="deluxe__area-item deluxe__area-hover"> 
-                    <div className="deluxe__area-item-image">
-                        <img className="img__full" src="/assets/img/luxury/luxury-5.jpg" alt="Luxury Room" />
-                    </div>
-                    <div className="deluxe__area-item-content"> 
-                        <h6><a href="#"><span>$249</span> / Night</a></h6>
-                        <h4><a href="RoomDetails.jsx">Luxury Room</a></h4>
-                        <a className="simple-btn" href="Contact.jsx"><i className="far fa-chevron-right"></i>Booking Now</a> 
-                    </div>
+              <div className="deluxe__area-item deluxe__area-hover">
+                <div className="deluxe__area-item-image">
+                  <img className="img__full" src="/assets/img/luxury/luxury-5.jpg" alt="Luxury Room" />
                 </div>
+                <div className="deluxe__area-item-content">
+                  <h4><a href="RoomDetails.jsx">Luxury Room</a></h4>
+                  <a className="simple-btn" href="Contact.jsx"><i className="far fa-chevron-right"></i>Booking Now</a>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
 
 
       {/* Video Area Start */}
@@ -192,8 +175,8 @@ const Home = () => {
         </div>
       </div>
       {/* Video Area End */}
-      
-      
+
+
       {/* Services Area Start */}
       <div className="services__area section-padding">
         <div className="container">
@@ -251,7 +234,7 @@ const Home = () => {
                   <span className="subtitle__one">Our Food</span>
                   <h2>Restaurant Silo</h2>
                   <p>Proin massa augue, lacinia at blandit ac, fringilla scelerisque tortor. Mauris sit amet lectus porta,</p>
-                  <a className="theme-border-btn" href="services-details.jsx">Read More<i className="fal fa-long-arrow-right"></i></a>
+                  <Link className="theme-border-btn" to="servicesdetails">Read More<i className="fal fa-long-arrow-right"></i></Link>
                 </div>
               </div>
             </div>
@@ -263,7 +246,7 @@ const Home = () => {
                   <span className="subtitle__one">Read Our Books</span>
                   <h2>The Library</h2>
                   <p>Proin massa augue, lacinia at blandit ac, fringilla scelerisque tortor. Mauris sit amet lectus porta,</p>
-                  <a className="theme-border-btn" href="services-details.jsx">Read More<i className="fal fa-long-arrow-right"></i></a>
+                  <Link className="theme-border-btn" to="servicesdetails">Read More<i className="fal fa-long-arrow-right"></i></Link>
                 </div>
               </div>
             </div>
@@ -285,8 +268,8 @@ const Home = () => {
                   <span className="subtitle__one">Fitness Equipment</span>
                   <h2>Exercise equipment</h2>
                   <p>Proin massa augue, lacinia at blandit ac, fringilla scelerisque tortor. Mauris sit amet lectus porta,</p>
-                  <a className="theme-border-btn" href="services-details.jsx">Read More<i className="fal fa-long-arrow-right"></i></a>
-                </div>
+                  <Link className="theme-border-btn" to="servicesdetails">Read More<i className="fal fa-long-arrow-right"></i></Link>
+                  </div>
               </div>
             </div>
           </div>
@@ -297,8 +280,8 @@ const Home = () => {
                   <span className="subtitle__one">Experiences</span>
                   <h2>Swimming Pool</h2>
                   <p>Proin massa augue, lacinia at blandit ac, fringilla scelerisque tortor. Mauris sit amet lectus porta,</p>
-                  <a className="theme-border-btn" href="services-details.jsx">Read More<i className="fal fa-long-arrow-right"></i></a>
-                </div>
+                  <Link className="theme-border-btn" to="servicesdetails">Read More<i className="fal fa-long-arrow-right"></i></Link>
+                  </div>
               </div>
             </div>
             <div className="col-xl-6 col-lg-6">
@@ -414,8 +397,9 @@ const Home = () => {
       </div>
       {/* Blog Area End */}
 
-   {/* <Footer/> */}
-   
-    </div>);};
+      {/* <Footer/> */}
+
+    </div>);
+};
 
 export default Home;

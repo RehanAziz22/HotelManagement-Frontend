@@ -9,7 +9,7 @@ const RoomStyle = () => {
   const [rooms,setRooms]= useState([])
 const Fetchrooms =async ()=>{
   try {
-    const response = await axios.get("http://localhost:3000/api/room");
+    const response = await axios.get("https://hotel-management-backend-ruby.vercel.app/api/room");
     console.log(response.data.data)
     setRooms(response.data.data)
 } catch (error) {

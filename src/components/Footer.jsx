@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="footer__area">
       <div className="container">
         <div className="row">
-          <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 sm-mb-30">
+          <div className="col-xl-3 col-lg-6 col-md-12 col-sm-12 sm-mb-30">
             <div className="footer__area-widget">
               <div className="footer__area-widget-about">
                 <div className="footer__area-widget-about-logo">
@@ -25,16 +25,30 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 lg-mb-30">
+          <div className="col-xl-2 col-lg-6 col-md-12 col-sm-12 sm-mb-30">
+            <div className="footer__area-widget">
+              <h5 style={{marginLeft:25}}>Quick Links</h5>
+              <div className="footer__area-widget-links">
+                <ul style={{ listStyle: 'none' }}>
+                  <li className="text-white"><Link to="/About">About Us</Link></li>
+                  <li className="text-white"><Link to="/ServicesDetails">Services</Link></li>
+                  <li className="text-white"><Link to="/Contact">Contact</Link></li>
+                  <li className="text-white"><Link to="/ServicesTeam">Terms & Conditions</Link></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-xl-7 col-lg-12 col-md-12 col-sm-12 lg-mb-30">
             <div className="footer__area-widget">
               <h5>Information</h5>
-              <div className="footer__area-widget-contact">
+              <div className="footer__area-widget-contact" style={{ display: 'flex', flexDirection: 'row',justifyContent:"space-between", alignItems:"center" }}>
                 <div className="footer__area-widget-contact-item">
                   <div className="footer__area-widget-contact-item-icon">
                     <i className="far fa-phone"></i>
                   </div>
                   <div className="footer__area-widget-contact-item-content">
-                    <p>+123-456-789</p>
+                    <p className="text-white">+123-456-789</p>
                   </div>
                 </div>
                 <div className="footer__area-widget-contact-item">
@@ -42,7 +56,7 @@ const Footer = () => {
                     <i className="far fa-envelope"></i>
                   </div>
                   <div className="footer__area-widget-contact-item-content">
-                    <p>info@example.com</p>
+                    <p className="text-white">info@example.com</p>
                   </div>
                 </div>
                 <div className="footer__area-widget-contact-item">
@@ -50,26 +64,13 @@ const Footer = () => {
                     <i className="far fa-map-marker-alt"></i>
                   </div>
                   <div className="footer__area-widget-contact-item-content">
-                    <p>123 Street, City, Country</p>
+                    <p className="text-white">123 Street, City, Country</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 sm-mb-30">
-            <div className="footer__area-widget">
-              <h5>Quick Links</h5>
-              <div className="footer__area-widget-links">
-                <ul>
-                  <li><Link to="/About">About Us</Link></li>
-                  <li><Link to="/ServicesDetails">Services</Link></li>
-                  <li><Link to="/Contact">Contact</Link></li>
-                  <li><Link to="/ServicesTeam">Terms & Conditions</Link></li>
-                  <li><Link to="/Privacy">Privacy Policy</Link></li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </footer>

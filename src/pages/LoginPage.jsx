@@ -39,7 +39,7 @@ const FormWrapper = styled(Paper)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
 }));
 
-const LoginPage = () => {
+const LoginPage = ({onLogin}) => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: "",
@@ -71,17 +71,33 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
-    console.log(formData);
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await axios.post("http://localhost:3000/api/user/login", formData);
-
+        const response = await axios.post("https://hotel-management-backend-ruby.vercel.app/api/user/login", formData);
+  
         if (response.data.status) {
           toast.success("Login successful!");
           console.log("User Data:", response.data.data);
-          localStorage.setItem("user",JSON.stringify(response.data.data))
-          navigate("/")
-          // Redirect or perform other actions based on the response
+  
+          // Store user data in localStorage
+          localStorage.setItem("user", JSON.stringify(response.data.data));
+          onLogin(response.data.data);
+  
+
+          // window.location.reload();
+          // Check the role of the user and navigate accordingly
+          const { role } = response.data.data;
+  
+          // Navigate based on the user's role
+          if (role === "manager") {
+            navigate("/manager");
+          } else if (role === "housekeeping") {
+            navigate("/housekeeping");
+          } else if (role === "receptionist") {
+            navigate("/receptionist");
+          } else {
+            navigate("/"); // Redirect to the guest portal if no specific role
+          }
         } else {
           toast.error(response.data.message || "Login failed");
         }
@@ -94,7 +110,7 @@ const LoginPage = () => {
       Object.values(validationErrors).forEach((error) => toast.error(error));
     }
   };
-
+  
   return (
     <Box
       sx={{

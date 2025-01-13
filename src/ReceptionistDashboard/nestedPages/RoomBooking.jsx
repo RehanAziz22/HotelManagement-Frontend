@@ -20,7 +20,7 @@ const RoomBooking = () => {
   const [snackbarMessage, setSnackbarMessage] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/room/')
+    axios.get('https://hotel-management-backend-ruby.vercel.app/api/room/')
       .then(response => {
         const availableRooms = response.data.data.filter(room => room.status === 'available' && room.availability);
         setRooms(availableRooms);
@@ -55,7 +55,7 @@ const RoomBooking = () => {
     setBillAmount(totalBill);
 
     try {
-      await axios.post('http://localhost:3000/api/room/book', {
+      await axios.post('https://hotel-management-backend-ruby.vercel.app/api/room/book', {
         guestId: user._id,
         guestName,
         guestContact,

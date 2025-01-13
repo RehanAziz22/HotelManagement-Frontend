@@ -16,13 +16,12 @@ import RoomStatusUpdatePage from './nestedPages/RoomStatusUpdatePage';
 import RoomBooking from './nestedPages/RoomBooking';
 import ScheduleTask from './nestedPages/ScheduleTask';
 import UpdateRoomDetails from './nestedPages/UpdateRoomDetails';
+import { useNavigate } from 'react-router-dom';
 
 // Dummy Components for Pages
 const NAVIGATION = [
 
-  {
-    kind: 'divider',
-  },
+
   {
     kind: 'header',
     title: 'Analytics',
@@ -64,6 +63,18 @@ const NAVIGATION = [
     segment: 'reportissue',
     title: 'Report Issue',
     icon: <BarChartIcon />,
+  },
+  {
+    kind: 'divider',
+  },
+  {
+    kind: 'header',
+    title: 'User',
+  },
+  {
+    segment: 'logout',
+    title: 'Logout',
+    icon: <LayersIcon />,  
   },
 ];
 
@@ -109,9 +120,10 @@ const Skeleton = styled('div')(({ theme, height }) => ({
 }));
 
 export default function RecepitionistDashboard(props) {
-  const { window, children } = props;
+  const { window, children,handleLogout } = props;
 
   const router = useDemoRouter('/roommanagement');
+
 
   // Map routes to components
   const renderPage = () => {
@@ -132,6 +144,8 @@ export default function RecepitionistDashboard(props) {
         return <RoomBooking />;
       case '/reportissue':
         return <ScheduleTask />;
+        case '/logout':
+          return handleLogout();
       default:
         return <div>Page Not Found</div>;
     }
@@ -146,6 +160,11 @@ export default function RecepitionistDashboard(props) {
       router={router}
       theme={demoTheme}
       window={demoWindow}
+      branding={{
+        logo: <img src="../../public/assets/img/logo.png" alt="MUI logo" />,
+        title: '',
+        homeUrl:"roommanagement"
+      }}
     >
       <DashboardLayout>
         <PageContainer>

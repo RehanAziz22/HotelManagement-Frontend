@@ -11,7 +11,7 @@ const AnalyticsPage = () => {
   
   // Fetch Room Data
   const fetchRoomData = async () => {
-    const res = await axios.get("http://localhost:3000/api/room");
+    const res = await axios.get("https://hotel-management-backend-ruby.vercel.app/api/room");
     setRoomData(res.data.data);
     generateOccupancyData(res.data.data);
     generateRevenueData(res.data.data);
@@ -19,7 +19,7 @@ const AnalyticsPage = () => {
 
   // Fetch User Data
   const fetchUserData = async () => {
-    const res = await axios.get("http://localhost:3000/api/user");
+    const res = await axios.get("https://hotel-management-backend-ruby.vercel.app/api/user");
     setUserData(res.data.data);
   };
 

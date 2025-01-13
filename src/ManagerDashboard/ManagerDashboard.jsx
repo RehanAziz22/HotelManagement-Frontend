@@ -18,13 +18,14 @@ import RoomBooking from './nestedPages/RoomBooking';
 import InvoiceList from './nestedPages/InvoiceList';
 import UpdateRoomDetails from './nestedPages/UpdateRoomDetails';
 import AnalyticsPage from './nestedPages/AnalyticsPage';
+import { useNavigate } from 'react-router-dom';
 
 const NAVIGATION = [
   {
     kind: 'header',
     title: 'Main items',
   },
- 
+
   {
     segment: 'roommanagement',
     title: 'Room Management',
@@ -76,7 +77,19 @@ const NAVIGATION = [
     title: 'Analytics',
     icon: <BarChartIcon />,
   },
-  
+  {
+    kind: 'divider',
+  },
+  {
+    kind: 'header',
+    title: 'User',
+  },
+  {
+    segment: 'logout',
+    title: 'Logout',
+    icon: <LayersIcon />,
+  },
+
 ];
 
 const demoTheme = extendTheme({
@@ -99,7 +112,7 @@ function useDemoRouter(initialPath) {
   const router = React.useMemo(() => {
     const params = {}
     const pathParts = pathname.split('/')
-    if(pathParts[1]==="roommanagement" && pathParts[2] === "rooms"){
+    if (pathParts[1] === "roommanagement" && pathParts[2] === "rooms") {
       params.id = pathParts[3]
     }
     return {
@@ -121,14 +134,19 @@ const Skeleton = styled('div')(({ theme, height }) => ({
 }));
 
 export default function ManagerDashboard(props) {
-  const { window, children } = props;
+  const { window, children,handleLogout } = props;
 
   const router = useDemoRouter('/roommanagement');
+  const navigate = useNavigate()
 
+  // const handleLogout = () => {
+  //   localStorage.removeItem('user');
+  //   navigate('/loginpage');
+  // };
   // Map routes to components
   const renderPage = () => {
     switch (router.pathname) {
- 
+
       case '/roommanagement':
         return <RoomsPage router={router} />;
       case '/roommanagement/createroom':
@@ -137,8 +155,8 @@ export default function ManagerDashboard(props) {
         return <RoomsPage router={router} />;
       case `/roommanagement/rooms/${router.params.id}`:
         return <RoomStatusUpdatePage router={router} />;
-        case '/roommanagement/updateroom':
-          return <UpdateRoomDetails router={router}/>;
+      case '/roommanagement/updateroom':
+        return <UpdateRoomDetails router={router} />;
       case '/users':
         return <StaffProfile />;
       case '/users/staffprofile':
@@ -149,8 +167,10 @@ export default function ManagerDashboard(props) {
         return <RoomBooking />;
       case '/invoices':
         return <InvoiceList />;
-        case '/analytics':
-          return <AnalyticsPage />;
+      case '/analytics':
+        return <AnalyticsPage />;
+      case '/logout':
+        return handleLogout();
       default:
         return <div>Page Not Found</div>;
     }
@@ -165,6 +185,11 @@ export default function ManagerDashboard(props) {
       router={router}
       theme={demoTheme}
       window={demoWindow}
+      branding={{
+        logo: <img src="../../public/assets/img/logo.png" alt="MUI logo" />,
+        title: '',
+        homeUrl:"roommanagement"
+      }}
     >
       <DashboardLayout>
         <PageContainer>
